@@ -16,7 +16,7 @@ Este repositório contém a resolução completa de uma lista de exercícios Doc
 
 ## 🟢 Fácil
 
-### 1. Rodando um container básico (Nginx + TailwindCSS)
+### 1. Rodando um container básico (Nginx + TailwindCSS)(Exercicio01/README.md)  
 - Executa um container com Nginx.
 - Usa uma landing page do TailwindCSS como conteúdo estático.
 
