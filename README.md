@@ -16,19 +16,19 @@ Este repositório contém a resolução completa de uma lista de exercícios Doc
 
 ## 🟢 Fácil
 
-### 1. Rodando um container básico (Nginx + TailwindCSS)(Exercicio01/README.md)  
+### 1. [Rodando um container básico (Nginx + TailwindCSS)](Exercicio01/README.md)  
 - Executa um container com Nginx.
 - Usa uma landing page do TailwindCSS como conteúdo estático.
 
-### 2. Container interativo com Ubuntu
+### 2. [Container interativo com Ubuntu](Exercicio02/README.md)  
 - Acessa terminal bash.
 - Roda scripts e instala pacotes manualmente.
 
-### 3. Listando e removendo containers
+### 3. [Listando e removendo containers](Exercicio03/README.md)  
 - Lista containers ativos e inativos.
 - Para e remove containers.
 
-### 4. Dockerfile para aplicação Flask
+### 4. [Dockerfile para aplicação Flask](Exercicio04/README.md)  
 - Criação de uma imagem Docker com Python e Flask.
 - Responde uma rota simples.
 
@@ -36,37 +36,37 @@ Este repositório contém a resolução completa de uma lista de exercícios Doc
 
 ## 🟡 Médio
 
-### 5. Volumes com MySQL
+### 5. [Volumes com MySQL](Exercicio05/README.md)  
 - Cria um volume para armazenar dados persistentes do banco MySQL.
 
-### 6. Multi-stage build com Go
+### 6. [Multi-stage build com Go](Exercicio06/README.md)  
 - Cria build otimizado de uma aplicação Go usando múltiplos estágios.
 
-### 7. Rede Docker com Node.js e MongoDB
+### 7. [Rede Docker com Node.js e MongoDB](Exercicio07/README.md)  
 - Cria uma rede personalizada.
 - Faz comunicação entre containers.
 
-### 8. Compose file com PostgreSQL e pgAdmin
+### 8. [Compose file com PostgreSQL e pgAdmin](Exercicio08/README.md)  
 - Usa Docker Compose para gerenciar uma aplicação com banco e interface gráfica.
 
 ---
 
 ## 🔴 Difícil
 
-### 9. Imagem personalizada com Nginx ou Apache
+### 9. [Imagem personalizada com Nginx ou Apache](Exercicio09/README.md)  
 - Cria uma imagem com arquivos estáticos (HTML/CSS).
 - Usa uma landing page moderna do Creative Tim.
 
-### 10. Evitar execução como root
+### 10. [Evitar execução como root](Exercicio10/README.md)  
 - Cria um usuário no Dockerfile.
 - Define como usuário padrão com `USER`.
 
-### 11. Análise de vulnerabilidades com Trivy
+### 11. [Análise de vulnerabilidades com Trivy](Exercicio11/README.md)  
 - Instala o Trivy.
 - Analisa imagens públicas (ex: `python:3.9`, `node:16`).
 - Identifica e sugere ações para vulnerabilidades HIGH/CRITICAL.
 
-### 12. Corrigindo vulnerabilidades
+### 12. [Corrigindo vulnerabilidades](Exercicio12/README.md)  
 - Melhora Dockerfile vulnerável.
 - Aplica boas práticas de segurança e tamanho de imagem.
 
