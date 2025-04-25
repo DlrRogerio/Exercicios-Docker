@@ -1,4 +1,4 @@
-# Listando e Removendo Containers com Docker
+# Exercício 03 - Listando e Removendo Containers
 
 Liste todos os containers em execução e parados, pare um container em execução e remova um container específico.
 
