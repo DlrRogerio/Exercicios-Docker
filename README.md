@@ -6,10 +6,10 @@ Este repositório contém a resolução completa de uma lista de exercícios Doc
 
 ## ✅ Pré-requisitos
 
-- Docker
-- Docker Compose
-- Git
-- Trivy (para o exercício 11)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
+- [Trivy](https://github.com/aquasecurity/trivy) (para o exercício 11)
 - Navegador para visualizar páginas web
 
 ---
@@ -21,7 +21,7 @@ Este repositório contém a resolução completa de uma lista de exercícios Doc
 - Usa uma landing page do TailwindCSS como conteúdo estático.
 
 ### 2. [Container interativo com Ubuntu](Exercicio02/README.md)  
-- Acessa terminal bash.
+- Acessa o terminal bash.
 - Roda scripts e instala pacotes manualmente.
 
 ### 3. [Listando e removendo containers](Exercicio03/README.md)  
@@ -30,7 +30,7 @@ Este repositório contém a resolução completa de uma lista de exercícios Doc
 
 ### 4. [Dockerfile para aplicação Flask](Exercicio04/README.md)  
 - Criação de uma imagem Docker com Python e Flask.
-- Responde uma rota simples.
+- Responde a uma rota simples.
 
 ---
 
@@ -40,35 +40,54 @@ Este repositório contém a resolução completa de uma lista de exercícios Doc
 - Cria um volume para armazenar dados persistentes do banco MySQL.
 
 ### 6. [Multi-stage build com Go](Exercicio06/README.md)  
-- Cria build otimizado de uma aplicação Go usando múltiplos estágios.
+- Cria um build otimizado de uma aplicação Go usando múltiplos estágios.
 
 ### 7. [Rede Docker com Node.js e MongoDB](Exercicio07/README.md)  
 - Cria uma rede personalizada.
 - Faz comunicação entre containers.
 
 ### 8. [Compose file com PostgreSQL e pgAdmin](Exercicio08/README.md)  
-- Usa Docker Compose para gerenciar uma aplicação com banco e interface gráfica.
+- Usa Docker Compose para gerenciar uma aplicação com banco de dados e interface gráfica.
 
 ---
 
 ## 🔴 Difícil
 
 ### 9. [Imagem personalizada com Nginx ou Apache](Exercicio09/README.md)  
-- Cria uma imagem com arquivos estáticos (HTML/CSS).
-- Usa uma landing page moderna do Creative Tim.
+- Objetivo: Criar uma imagem baseada no Nginx ou Apache para hospedar arquivos HTML/CSS estáticos.
+- Descrição:
+  - Utilize a landing page do [Creative Tim](https://www.creative-tim.com/) como conteúdo estático.
+  - Configure o `Dockerfile` para copiar os arquivos da landing page para o diretório padrão do servidor web.
+  - Construa e execute o container, expondo-o na porta 8080 para acessar a página no navegador.
 
 ### 10. [Evitar execução como root](Exercicio10/README.md)  
-- Cria um usuário no Dockerfile.
-- Define como usuário padrão com `USER`.
+- Objetivo: Configurar um Dockerfile para executar um container com um usuário não-root.
+- Descrição:
+  - Crie um usuário no `Dockerfile` com `useradd` ou `adduser`.
+  - Defina esse usuário como padrão usando a instrução `USER`.
+  - Construa a imagem e inicie o container.
+  - Verifique se o processo está rodando com o novo usuário utilizando:
+    ```bash
+    docker exec <container> whoami
+    ```
 
 ### 11. [Análise de vulnerabilidades com Trivy](Exercicio11/README.md)  
-- Instala o Trivy.
-- Analisa imagens públicas (ex: `python:3.9`, `node:16`).
-- Identifica e sugere ações para vulnerabilidades HIGH/CRITICAL.
+- Objetivo: Utilizar o Trivy para identificar vulnerabilidades em imagens Docker públicas.
+- Descrição:
+  - Instale o Trivy em sua máquina.
+  - Analise uma imagem pública, como `python:3.9` ou `node:16`.
+  - Filtre vulnerabilidades com severidade **HIGH** ou **CRITICAL**.
+  - Documente os pacotes ou bibliotecas afetadas e sugira possíveis ações, como atualização da imagem base ou substituição de dependências.
 
-### 12. [Corrigindo vulnerabilidades](Exercicio12/README.md)  
-- Melhora Dockerfile vulnerável.
-- Aplica boas práticas de segurança e tamanho de imagem.
+### 12. [Corrigir vulnerabilidades encontradas](Exercicio12/README.md)  
+- Objetivo: Aplicar melhorias em um Dockerfile vulnerável, seguindo boas práticas de segurança.
+- Descrição:
+  - Trabalhe com um exemplo de Dockerfile que utiliza uma imagem base genérica e executa como usuário root.
+  - Identifique melhorias, como:
+    - Substituir a imagem base por uma versão mais enxuta.
+    - Criar um usuário não-root.
+    - Remover bibliotecas desnecessárias e limpar o cache.
+  - Gere um novo Dockerfile mais seguro e otimizado.
 
 ---
 
@@ -80,8 +99,8 @@ As capturas de tela dos testes e execuções estão localizadas nas respectivas 
 
 ## 🧑‍💻 Autor
 
-Feito por [Seu Nome Aqui] 🚀  
-[Seu LinkedIn ou GitHub]
+Feito por Rogério 🚀  
+[[Seu LinkedIn ou GitHub]](https://www.linkedin.com/in/rogerio-de-lima-rodrigues/)
 
 ---
 
