@@ -11,7 +11,7 @@ Antes de começar, atualize os pacotes do sistema para garantir que tudo está a
 
 ```bash
 sudo apt update
-sudo apt install docker.io -y
+
 ```
 
 ### 2. Criar o Diretório do Projeto
@@ -26,7 +26,7 @@ cd nginx-landing
 Clone o repositório que contém os arquivos necessários para o projeto.
 
 ```bash
-git clone https://github.com/tailwindtoolbox/Landing-Page
+git clone https://github.com/tailwindtoolbox/Landing-Page .
 ```
 
 ### 4. Criar o Dockerfile
@@ -98,6 +98,8 @@ Se você quiser remover o container completamente:
 ```bash
 docker rm meu-site
 ```
+
+⚠️ **Nota:** Só é possível remover o container se ele estiver interrompido.
 
 ---
 
