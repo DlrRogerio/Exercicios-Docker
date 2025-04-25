@@ -45,12 +45,6 @@ Crie um script chamado `script.sh` e cole o seguinte conteúdo:
 ```bash
 #!/bin/bash
 
-echo "📦 Atualizando lista de pacotes..."
-apt update -y > /dev/null
-
-echo "📥 Instalando o pacote 'logrotate' (opcional)..."
-apt install logrotate -y > /dev/null
-
 echo ""
 echo "📂 Listando arquivos em /var/log:"
 ls -lh /var/log
@@ -68,7 +62,8 @@ echo "📄 Exibindo os últimos 10 registros do syslog (se existir):"
 if [ -f /var/log/syslog ]; then
     tail -n 10 /var/log/syslog
 else
-    echo "⚠️  syslog não está disponível neste container."
+    echo "⚠️  syslog não está disponível neste container. Tentando journalctl..."
+    journalctl -n 10 2>/dev/null || echo "❌ journalctl também não disponível."
 fi
 
 echo ""
@@ -87,12 +82,21 @@ echo "✅ Fim do script de logs."
 
 ### 4. Explicação do Script
 O script realiza as seguintes operações:
-1. Atualiza a lista de pacotes (`apt update`).
-2. Instala o pacote `logrotate` (opcional).
-3. Lista os arquivos no diretório `/var/log`.
-4. Exibe as 10 primeiras linhas do arquivo `/var/log/dpkg.log`, se existir.
-5. Exibe os últimos 10 registros do syslog, se disponível.
-6. Finaliza com uma mensagem de sucesso.
+1. **Lista os arquivos no diretório `/var/log`**  
+   Exibe uma listagem detalhada (`ls -lh`) para mostrar os arquivos de log disponíveis.
+
+2. **Verifica e exibe o conteúdo de `/var/log/dpkg.log`**  
+   - Se o arquivo existir, mostra as 10 primeiras linhas com `head -n 10`.  
+   - Caso não exista, exibe uma mensagem de aviso.
+
+3. **Verifica e exibe os últimos registros do syslog**  
+   - Se o arquivo `/var/log/syslog` existir, mostra as últimas 10 linhas com `tail -n 10`.  
+   - Se não existir, tenta buscar os 10 últimos registros do sistema com `journalctl -n 10`.  
+   - Caso `journalctl` também não esteja disponível, exibe um aviso de indisponibilidade.
+
+4. **Mensagem final**  
+   Finaliza com uma mensagem indicando que o script foi executado com sucesso.
+
 
 ---
 
@@ -107,10 +111,11 @@ chmod +x script.sh
 ---
 
 ## Resultados Esperados
-- Atualização silenciosa da lista de pacotes e instalação do `logrotate`.
-- Listagem de arquivos no diretório `/var/log`.
-- Exibição das primeiras linhas de `/var/log/dpkg.log` (se existir).
-- Exibição dos últimos registros do syslog (se disponível).
+- Listagem detalhada dos arquivos presentes no diretório `/var/log`.
+- Exibição das 10 primeiras linhas do arquivo `/var/log/dpkg.log`, se o arquivo existir.
+- Exibição dos últimos 10 registros do arquivo `/var/log/syslog`, se disponível.
+- Caso o `syslog` não esteja disponível, exibição dos últimos 10 registros do sistema via `journalctl`, se instalado.
+- Finalização com uma mensagem indicando a conclusão do script.
 
 ---
 
