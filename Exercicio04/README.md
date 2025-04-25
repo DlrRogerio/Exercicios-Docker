@@ -1,6 +1,6 @@
-# Exercício 04 - Configuração de um Dockerfile para Aplicação Flask
+# Exercício 04 - Criando um Dockerfile para uma aplicação simples em Python
 
-Este guia apresenta um exemplo de configuração de um `Dockerfile` para uma aplicação Flask simples que retorna uma mensagem ao acessar um endpoint. O objetivo é criar um ambiente Docker isolado para rodar a aplicação.
+Crie um Dockerfile para uma aplicação Flask que retorna uma mensagem ao acessar um endpoint, para isso utilize o projeto [Docker Flask](https://github.com/docker/awesome-compose/tree/master/flask/app)
 
 ## Estrutura do Projeto
 
@@ -42,34 +42,15 @@ flask
 O `Dockerfile` é responsável por construir a imagem Docker. Ele inclui todas as etapas necessárias, como instalação de dependências, criação de usuário não-root e configuração do ambiente para rodar a aplicação Flask.
 
 ```dockerfile
-# Usar uma imagem base do Python
 FROM python:3.9-slim
-
-# Configurar o diretório de trabalho
 WORKDIR /app
-
-# Copiar o arquivo de requisitos para o container
 COPY requirements.txt requirements.txt
-
-# Instalar as dependências do Python
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copiar os arquivos do app para o container
 COPY . .
-
-# Criar um usuário não-root
 RUN adduser --disabled-password --gecos '' appuser
-
-# Alterar a propriedade dos arquivos para o novo usuário
 RUN chown -R appuser:appuser /app
-
-# Alternar para o usuário não-root
 USER appuser
-
-# Expor a porta em que a aplicação será executada
 EXPOSE 8000
-
-# Comando para iniciar a aplicação Flask
 CMD ["python", "app.py"]
 ```
 
