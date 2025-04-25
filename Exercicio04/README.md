@@ -1,21 +1,35 @@
-# Exercício 04 - Criando um Dockerfile para uma aplicação simples em Python
+# Exercício 04 - Criando um Dockerfile para uma Aplicação Simples em Python
 
-Crie um Dockerfile para uma aplicação Flask que retorna uma mensagem ao acessar um endpoint, para isso utilize o projeto [Docker Flask](https://github.com/docker/awesome-compose/tree/master/flask/app)
+Este exercício demonstra como criar um Dockerfile para uma aplicação Flask que retorna uma mensagem ao acessar um endpoint.
 
-## Estrutura do Projeto
+## Preparação Inicial
 
-Certifique-se de que o projeto tenha a seguinte estrutura de arquivos:
+1. Clone o repositório **awesome-compose** que contém o projeto base para este exercício:
+   ```bash
+   git clone https://github.com/docker/awesome-compose.git
+   ```
+
+2. Acesse a pasta do projeto Flask:
+   ```bash
+   cd awesome-compose/flask/app
+   ```
+
+3. Substitua o conteúdo do arquivo `Dockerfile` existente pelo conteúdo fornecido neste README. O arquivo `Dockerfile` já existe no projeto, mas será sobrescrito com um novo conteúdo que segue as instruções deste exercício.
+
+Certifique-se de que o projeto tenha a seguinte estrutura de arquivos após acessar o diretório:
 
 ```
-project/
+app/
 ├── Dockerfile
 ├── app.py
 ├── requirements.txt
 ```
 
-### Arquivo `app.py`
+---
 
-Este arquivo contém o código da aplicação Flask. Ele define um endpoint que retorna uma mensagem simples.
+## Arquivo `app.py`
+
+Este arquivo contém o código da aplicação Flask. Ele define um endpoint que retorna uma mensagem simples:
 
 ```python
 from flask import Flask
@@ -29,17 +43,21 @@ if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=8000)
 ```
 
-### Arquivo `requirements.txt`
+---
 
-Este arquivo lista as dependências do Python necessárias para o projeto. Certifique-se de incluir a versão correta do Flask.
+## Arquivo `requirements.txt`
+
+Este arquivo lista as dependências do Python necessárias para o projeto. Certifique-se de incluir a versão correta do Flask:
 
 ```
 flask
 ```
 
-### Arquivo `Dockerfile`
+---
 
-O `Dockerfile` é responsável por construir a imagem Docker. Ele inclui todas as etapas necessárias, como instalação de dependências, criação de usuário não-root e configuração do ambiente para rodar a aplicação Flask.
+## Arquivo `Dockerfile`
+
+O `Dockerfile` é responsável por construir a imagem Docker. Substitua o conteúdo do arquivo `Dockerfile` existente pelo seguinte:
 
 ```dockerfile
 FROM python:3.9-slim
@@ -53,6 +71,20 @@ USER appuser
 EXPOSE 8000
 CMD ["python", "app.py"]
 ```
+
+### Explicação do Dockerfile
+- **`FROM python:3.9-slim`**: Utiliza a imagem base do Python 3.9 otimizada para menor tamanho.
+- **`WORKDIR /app`**: Define o diretório de trabalho dentro do container.
+- **`COPY requirements.txt requirements.txt`**: Copia o arquivo de dependências para o container.
+- **`RUN pip install --no-cache-dir -r requirements.txt`**: Instala as dependências listadas em `requirements.txt`.
+- **`COPY . .`**: Copia todos os arquivos do diretório local para o container.
+- **`RUN adduser --disabled-password --gecos '' appuser`**: Cria um usuário não-root chamado `appuser`.
+- **`RUN chown -R appuser:appuser /app`**: Altera a propriedade dos arquivos para o usuário `appuser`.
+- **`USER appuser`**: Define o usuário não-root como padrão para rodar a aplicação.
+- **`EXPOSE 8000`**: Expõe a porta 8000 para o tráfego HTTP.
+- **`CMD ["python", "app.py"]`**: Comando para iniciar a aplicação Flask.
+
+---
 
 ## Passos para Construir e Executar o Container
 
@@ -86,9 +118,9 @@ A resposta esperada será:
 Hello World!
 ```
 
-4. **Verificar Permissões**
-   Certifique-se de que os arquivos da aplicação possuem permissões adequadas para o usuário não-root criado no `Dockerfile`.
+---
+
 
 ## Conclusão
 
-Seguindo este guia, você terá uma aplicação Flask rodando em um ambiente Docker isolado, com segurança adicional ao rodar como usuário não-root.
+Seguindo este guia, você terá uma aplicação Flask rodando em um ambiente Docker isolado.
