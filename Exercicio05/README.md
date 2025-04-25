@@ -1,92 +1,160 @@
-# Criando Containers com Usuário Não Root
+# Criando e Utilizando Volumes para Persistência de Dados com MySQL
 
-Este guia demonstra como criar uma imagem Docker segura, configurando-a para executar uma aplicação com um usuário não-root. Essa prática reduz os riscos de segurança ao isolar o processo de execução de privilégios elevados.
+Este guia demonstra como configurar um container MySQL utilizando volumes para persistir os dados do banco de dados. Este exemplo utiliza o [repositório awesome-compose](https://github.com/docker/awesome-compose/tree/master/react-express-mysql), que contém uma aplicação React + Express + MySQL.
 
 ---
 
-## **1. Dockerfile**
+## **Passo a Passo**
 
-O exemplo abaixo mostra como configurar um `Dockerfile` para que a aplicação utilize um usuário não-root:
+### **1. Clone o Repositório**
 
-```dockerfile
-# Use uma imagem base leve
-FROM node:20-alpine
+Clone o repositório `awesome-compose` e navegue para o diretório do exemplo `react-express-mysql`:
 
-# Define o diretório de trabalho no container
-WORKDIR /app
-
-# Adiciona um usuário não-root
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
-# Copia os arquivos do seu projeto para o container
-COPY --chown=appuser:appgroup . .
-
-# Instala as dependências do projeto
-RUN npm install
-
-# Expõe a porta que o aplicativo usará
-EXPOSE 3000
-
-# Define o usuário não-root para executar o processo
-USER appuser
-
-# Comando para iniciar a aplicação
-CMD ["npm", "start"]
+```bash
+git clone https://github.com/docker/awesome-compose.git
+cd awesome-compose/react-express-mysql
 ```
 
 ---
 
-## **2. Explicação do Dockerfile**
+### **2. Edite o Arquivo `docker-compose.yml`**
 
-- **Imagem Base (`FROM`):** Utilizamos a imagem `node:20-alpine` por ser leve e otimizada para produção.
-- **Criação de Usuário (`RUN addgroup` e `adduser`):** Criamos um grupo e um usuário chamado `appuser` sem privilégios de root.
-- **Permissões de Arquivos (`COPY --chown`):** Copiamos os arquivos do projeto para o container e ajustamos suas permissões para o usuário e grupo criados.
-- **Definição do Usuário (`USER appuser`):** Especificamos que todos os comandos e processos subsequentes serão executados pelo usuário `appuser`.
-- **CMD:** Inicia o servidor do aplicativo.
+Certifique-se de que o arquivo `docker-compose.yml` está configurado para usar volumes para persistência de dados no serviço MySQL. Aqui está a configuração:
+
+```yaml
+version: '3.8'
+
+services:
+  # Serviço MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: react_express_mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: my_database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # Serviço Backend (Express)
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: react_express_mysql_backend
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: my_database
+    depends_on:
+      - mysql
+
+  # Serviço Frontend (React)
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: react_express_mysql_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+```
 
 ---
 
-## **3. Construindo e Executando o Container**
+### **3. Inicie os Containers**
 
-1. **Construa a imagem Docker:**
-   ```bash
-   docker build -t minha-aplicacao-segura .
-   ```
+Execute o seguinte comando para iniciar os serviços:
 
-2. **Execute o container:**
-   ```bash
-   docker run -d -p 3000:3000 minha-aplicacao-segura
-   ```
-
-3. **Verifique se o container está rodando:**
-   ```bash
-   docker ps
-   ```
+```bash
+docker-compose up -d
+```
 
 ---
 
-## **4. Validando o Usuário no Container**
+### **4. Teste a Persistência de Dados**
 
-Para verificar que o container está sendo executado com o usuário não-root:
+1. **Insira Dados no Banco:**
+   - Use o backend ou um cliente MySQL para inserir dados no banco:
+     ```bash
+     docker exec -it react_express_mysql_db mysql -u user -ppassword my_database
+     ```
+   - Execute comandos SQL para inserir dados.
 
-1. Acesse o container:
-   ```bash
-   docker exec -it <container_id> sh
-   ```
+2. **Pare os Containers:**
+   - Pare e remova os containers:
+     ```bash
+     docker-compose down
+     ```
 
-2. Verifique o usuário atual:
-   ```bash
-   whoami
-   ```
-   Isso deve retornar `appuser`.
+3. **Reinicie os Containers:**
+   - Execute novamente:
+     ```bash
+     docker-compose up -d
+     ```
+
+4. **Verifique os Dados:**
+   - Conecte-se ao container MySQL e confira se os dados inseridos anteriormente ainda estão disponíveis.
 
 ---
 
-## **5. Benefícios de Usar Usuário Não-Root**
+## **Explicação da Configuração**
 
-- **Redução de Impacto de Vulnerabilidades:** Se um invasor explorar uma vulnerabilidade, ele terá acesso limitado, pois não terá privilégios de root.
-- **Boas Práticas de Segurança:** É uma prática recomendada para criar containers seguros em ambientes de produção.
+### **Serviço MySQL (`mysql`)**
+- **Imagem:** Utiliza a imagem oficial do MySQL (`mysql:8.0`).
+- **Credenciais:**
+  - `MYSQL_ROOT_PASSWORD`: Define a senha do usuário root.
+  - `MYSQL_DATABASE`: Cria um banco de dados inicial.
+  - `MYSQL_USER` e `MYSQL_PASSWORD`: Definem as credenciais para o usuário da aplicação.
+- **Volumes:**
+  - Mapeamento `mysql_data:/var/lib/mysql` garante que os dados do banco sejam persistidos.
+
+### **Serviço Backend (`backend`)**
+- Conecta-se ao MySQL utilizando as credenciais configuradas.
+- Depende do serviço MySQL para iniciar.
+
+### **Serviço Frontend (`frontend`)**
+- Fornece uma interface React para interagir com o backend.
+- Depende do serviço backend para iniciar.
+
+### **Volumes**
+- O volume `mysql_data` armazena os dados de maneira persistente, garantindo que não sejam perdidos ao reiniciar ou remover os containers.
 
 ---
 
-Se precisar de mais exemplos ou ajuda com configurações específicas, fique à vontade para contribuir ou abrir uma issue! 🚀
+## **Benefícios do Uso de Volumes**
+- **Persistência de Dados:** Garante que os dados do banco sejam preservados mesmo após reiniciar os containers.
+- **Isolamento:** Os volumes são gerenciados pelo Docker, melhorando a segurança e simplificando o gerenciamento.
+- **Backup Facilitado:** Os dados podem ser facilmente copiados ou sincronizados para backups.
+
+---
+
+## **Comandos Úteis**
+
+- **Verificar Containers Ativos:**
+  ```bash
+  docker ps
+  ```
+
+- **Parar e Remover Containers:**
+  ```bash
+  docker-compose down
+  ```
+
+- **Reiniciar Serviços:**
+  ```bash
+  docker-compose up -d
+  ```
+
+---
+
+Sinta-se à vontade para contribuir ou abrir uma issue no [repositório awesome-compose](https://github.com/docker/awesome-compose) se tiver dúvidas ou sugestões! 🚀
