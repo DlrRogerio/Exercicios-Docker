@@ -1,4 +1,4 @@
-# Criando e rodando um container interativo
+# Exercício 02 - Criando e rodando um container interativo
 
 Inicie um container Ubuntu e interaja com o terminal dele. Teste um script Bash que imprime logs do sistema ou instala pacotes de forma interativa.
 
