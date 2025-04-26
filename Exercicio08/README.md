@@ -1,6 +1,6 @@
 # Criando um Compose File para Rodar uma Aplicação com Banco de Dados
 
-Este guia mostra como configurar um ambiente com Docker Compose contendo uma aplicação com PostgreSQL e uma interface gráfica de gerenciamento usando o pgAdmin4.
+Utilize Docker Compose para configurar uma aplicação com um banco de dados PostgreSQL, use para isso o projeto [pgadmin](https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin).
 
 ---
 
@@ -110,6 +110,3 @@ volumes:
 - **Persistência de Dados:** O volume `postgres_data` garante que os dados do banco sejam preservados mesmo após reiniciar os containers.
 - **Flexibilidade:** Fácil de escalar e ajustar os serviços conforme a necessidade.
 
----
-
-Se precisar de mais ajuda ou tiver dúvidas, fique à vontade para contribuir ou abrir uma issue! 🚀
