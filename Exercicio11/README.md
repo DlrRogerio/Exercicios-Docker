@@ -1,6 +1,15 @@
-# Analisando Imagem Docker com Trivy
+# Exercício 11 - Analisando Imagem Docker com Trivy
 
-Neste exercício, utilizaremos o Trivy, uma ferramenta open source para análise de vulnerabilidades, para escanear uma imagem Docker pública em busca de vulnerabilidades conhecidas.
+Trivy é uma ferramenta open source para análise de vulnerabilidades em imagens
+Docker. Neste exercício, você irá analisar uma imagem pública, como python:3.9 ou
+node:16, em busca de vulnerabilidades conhecidas.
+Você deverá:
+- Instalar o Trivy na sua máquina (via script ou pacote).
+- Rodar trivy image <nome-da-imagem> para analisar.
+- Identificar vulnerabilidades com severidade HIGH ou CRITICAL.
+- Anotar os pacotes ou bibliotecas afetadas e sugerir possíveis ações (como
+atualização da imagem base ou substituição de dependências).
+
 
 ---
 
