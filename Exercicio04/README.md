@@ -1,6 +1,6 @@
 # Exercício 04 - Criando um Dockerfile para uma Aplicação Simples em Python
 
-Este exercício demonstra como criar um Dockerfile para uma aplicação Flask que retorna uma mensagem ao acessar um endpoint.
+Crie um Dockerfile para uma aplicação Flask que retorna uma mensagem ao acessar um endpoint, para isso utilize o projeto [Docker Flask](https://github.com/docker/awesome-compose/tree/master/flask).
 
 ## Preparação Inicial
 
