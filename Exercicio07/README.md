@@ -1,6 +1,7 @@
-# Construção de Rede Docker para Comunicação entre Containers (Node.js + MongoDB)
+# Exercício 07 - Construindo uma rede Docker para comunicação entre containers
 
-Este guia demonstra como criar redes Docker personalizadas para permitir a comunicação entre containers Node.js (backend) e MongoDB. Além disso, o frontend também será configurado para acessar o backend corretamente.
+Crie uma rede Docker personalizada e faça dois containers, um Node.js e um
+MongoDB, se comunicarem, sugestão, utilize o projeto [React Express + Mongo](https://github.com/docker/awesome-compose/tree/master/react-express-mongodb)
 
 ---
 
@@ -156,7 +157,3 @@ networks:
   ```bash
   docker exec -it <container_name> sh
   ```
-
----
-
-Sinta-se à vontade para contribuir ou abrir uma issue para dúvidas ou melhorias! 🚀
