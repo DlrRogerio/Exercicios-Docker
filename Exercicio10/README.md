@@ -1,6 +1,16 @@
-# Criando Containers com Usuário Não Root
+# Exercício 10 - Evitar execução como root
 
-Este guia demonstra como criar uma imagem Docker segura, configurando-a para executar uma aplicação com um usuário não-root. Essa prática reduz os riscos de segurança ao isolar o processo de execução de privilégios elevados.
+Ao rodar containers com o usuário root, você expõe seu sistema a riscos maiores em
+caso de comprometimento. Neste exercício, você deverá criar um Dockerfile para
+uma aplicação simples (como um script Python ou um servidor Node.js) e configurar
+a imagem para rodar com um usuário não-root.
+Você precisará:
+- Criar um usuário com useradd ou adduser no Dockerfile.
+- Definir esse usuário como o padrão com a instrução USER.
+- Construir a imagem e iniciar o container.
+- Verificar se o processo está rodando com o novo usuário usando docker exec
+<container> whoami.
+
 
 ---
 
