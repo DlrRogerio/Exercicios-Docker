@@ -1,6 +1,7 @@
-# Criando e Utilizando Volumes para Persistência de Dados com MySQL
+# Exercício 05 - Criando e Utilizando Volumes para Persistência de Dados com MySQL
 
-Este guia demonstra como configurar um container MySQL utilizando volumes para persistir os dados do banco de dados. Este exemplo utiliza o [repositório awesome-compose](https://github.com/docker/awesome-compose/tree/master/react-express-mysql), que contém uma aplicação React + Express + MySQL.
+Execute um container MySQL e configure um volume para armazenar os dados do
+banco de forma persistente. Para aplicar esse conceito você pode utilizar o [react-express-mysql](https://github.com/docker/awesome-compose/tree/master/react-express-mysql).
 
 ---
 
@@ -155,6 +156,3 @@ docker-compose up -d
   docker-compose up -d
   ```
 
----
-
-Sinta-se à vontade para contribuir ou abrir uma issue no [repositório awesome-compose](https://github.com/docker/awesome-compose) se tiver dúvidas ou sugestões! 🚀
