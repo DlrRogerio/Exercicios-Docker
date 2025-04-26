@@ -1,4 +1,4 @@
-# Corrigindo Vulnerabilidades em Imagens Docker
+# Exercício 12 - Corrigindo Vulnerabilidades em Imagens Docker
 
 Após identificar vulnerabilidades com ferramentas como o Trivy, o próximo passo é
 corrigi-las. Imagens grandes e genéricas frequentemente trazem bibliotecas
