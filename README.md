@@ -100,7 +100,7 @@ As capturas de tela dos testes e execuções estão localizadas nas respectivas 
 ## 🧑‍💻 Autor
 
 Feito por Rogério 🚀  
-[[Seu LinkedIn ou GitHub]](https://www.linkedin.com/in/rogerio-de-lima-rodrigues/)
+[LinkedIn](https://www.linkedin.com/in/rogerio-de-lima-rodrigues/)
 
 ---
 
