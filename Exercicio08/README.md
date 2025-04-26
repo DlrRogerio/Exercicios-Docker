@@ -1,4 +1,4 @@
-# Criando um Compose File para Rodar uma Aplicação com Banco de Dados
+# Exercício 08 - Criando um Compose File para Rodar uma Aplicação com Banco de Dados
 
 Utilize Docker Compose para configurar uma aplicação com um banco de dados PostgreSQL, use para isso o projeto [pgadmin](https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin).
 
