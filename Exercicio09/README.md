@@ -1,6 +1,6 @@
-# Criando uma Imagem Personalizada com um Servidor Web e Arquivos Estáticos
+# Exercício 09 - Criando uma Imagem Personalizada com um Servidor Web e Arquivos Estáticos
 
-Este tutorial explica como criar uma imagem Docker personalizada para um servidor web baseado no Nginx, hospedando uma página HTML/CSS estática. Utilizaremos o projeto [Material Kit](https://github.com/creativetimofficial/material-kit) como exemplo.
+Construa uma imagem baseada no Nginx ou Apache, adicionando um site HTML/CSS estático. Utilize a [landing page do Creative Tim](https://github.com/creativetimofficial/material-kit) para criar uma página moderna hospedada no container.
 
 ---
 
