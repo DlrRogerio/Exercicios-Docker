@@ -86,7 +86,3 @@ Para verificar que o container está sendo executado com o usuário não-root:
 
 - **Redução de Impacto de Vulnerabilidades:** Se um invasor explorar uma vulnerabilidade, ele terá acesso limitado, pois não terá privilégios de root.
 - **Boas Práticas de Segurança:** É uma prática recomendada para criar containers seguros em ambientes de produção.
-
----
-
-Se precisar de mais exemplos ou ajuda com configurações específicas, fique à vontade para contribuir ou abrir uma issue! 🚀
